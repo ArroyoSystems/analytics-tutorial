@@ -1,0 +1,17 @@
+[sources.analytics]
+type = "http_server"
+address = "0.0.0.0:9845"
+encoding = "json"
+method = "POST"
+
+[sinks.kafka]
+inputs = ["analytics"]
+type = "kafka"
+bootstrap_servers = "kafka:9092"
+topic = "javascript-events"
+encoding.codec = "json"
+
+[sinks.console]
+inputs = ["analytics"]
+type = "console"
+encoding.codec = "json"
