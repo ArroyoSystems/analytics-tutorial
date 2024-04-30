@@ -30,10 +30,19 @@ services:
       retries: 5
 
   arroyo:
-    image: ghcr.io/arroyosystems/arroyo-single:latest
+    image: ghcr.io/arroyosystems/arroyo:latest
+    environment:
+      - DATABASE_HOST=postgres
+      - DATABASE_NAME=postgres
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
     ports:
       - '8000:8000'
-      - '8001:8001'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    entrypoint: >
+      bash -c "/app/arroyo-bin migrate && /app/arroyo-bin cluster"
 
   postgres:
     image: postgres:15
