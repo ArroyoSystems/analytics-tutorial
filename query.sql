@@ -63,7 +63,7 @@ CREATE TABLE top_pages_sink (
     'json.include_schema' = 'true',
     type = 'sink',
     bootstrap_servers = 'kafka:9092',
-    topic = 'metrics'
+    topic = 'top_pages'
 );
 
 INSERT INTO top_pages_sink
